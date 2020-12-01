@@ -1,0 +1,19 @@
+/* element */
+h1{
+    color: red;
+}
+
+/* class selector */
+.green{
+    color:green ;
+}
+
+/*sibling =>element, class*/
+.green.small{
+    font-size: 10px;
+}
+
+/*children selector*/
+div h1{
+    background-color: salmon;
+}

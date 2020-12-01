@@ -1,0 +1,75 @@
+fs - file system
+os - operating system
+path - platform independent code
+
+
+
+result link
+https://www.espncricinfo.com/scores/series/8048/season/2020/indian-premier-league?view=results
+
+https://www.espncricinfo.com/series/_/id/8048/season/2020/indian-premier-league
+homepage link
+
+
+
+
+
+
+
+
+
+
+
+request.js file
+//request pakage
+//npm install request
+//ci =>request
+
+let req=require("request");
+let fs=require("fs");
+//npm install cheerio
+let ch=require("cheerio");
+
+req("https://www.espncricinfo.com/series/8048/scorecard/1237181/delhi-capitals-vs-mumbai-indians-final-indian-premier-league-2020-21",urlkAns);
+
+function urlkAns(err,response,html){
+      console.log(err);
+    //  console.log(res.statusCode);
+    //  console.log(html);
+    //if(err)
+   // {
+     //   console.log("some error",err);
+    //}
+    //else
+    //{
+        //data->scrap
+        //console.log(html);
+    //load file
+    console.log("Recieved input");
+    //load html
+    let STool=ch.load(html);
+    //single
+    //let output=STool("div.summary");
+    //console.log(output.html());
+    //console.log(output.text());
+    //fs.writeFileSync("summary.html",output.html());
+   
+    //inning isolate
+   let inningArr=STool("div.card.content-block.match-scorecard-table");
+   let fullHtml="<table>"
+   
+   for(let i=0; i<inningArr.length-1; i++){
+      let tableBatsMan=
+      STool(inningArr[i]).find("table.table.batsman");
+      //extract batsman from the table
+      fullHtml+=STool(tableBatsMan).html();
+      fullHtml+="<table>";
+
+   }
+  fs.writeFileSync("innings.html",fullHtml);
+    
+   //fs.writeFileSync("h5Elements.html",AllElementMatchWithH5.html());
+   //fs.writeFileSync("index.html",html);
+
+    //}
+}
